@@ -30,7 +30,7 @@ export default async function Home() {
       <div className="max-w-full mx-auto mb-8">
         <Header />
       </div>
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {alimentos?.length === 0 ? (
           <p className="text-gray-500 bg-white p-6 rounded-lg shadow-sm border border-gray-100">O estoque está vazio no momento.</p>
         ) : (
