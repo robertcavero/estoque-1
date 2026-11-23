@@ -17,6 +17,7 @@ export default async function Home() {
     'use server';
     const id = formData.get('id');
     const supabaseServer = await createClient();
+    await supabaseServer.from('entregas').delete().eq('alimento_id', id);
     const { error } = await supabaseServer.from('alimentos').delete().eq('id', id);
     if (!error) revalidatePath('/'); 
   }
