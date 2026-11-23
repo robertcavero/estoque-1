@@ -11,15 +11,22 @@ export default async function NovoAlimento() {
   async function cadastrarAlimento(formData: FormData) {
     'use server';
     const supabase = await createClient();
-    const { error } = await supabase.from('alimentos').insert([{
+    const { data: alimento, error } = await supabase.from('alimentos').insert([{
       nome: formData.get('nome'),
       quantidade_kg: parseFloat(formData.get('quantidade_kg') as string),
       data_validade: formData.get('data_validade'),
       categoria_id: parseInt(formData.get('categoria_id') as string),
       doador_id: parseInt(formData.get('doador_id') as string),
-    }]);
+    }]).select().single();
 
     if (error) return;
+
+    await supabase.from('entregas').insert([{
+      alimento_id: alimento.id,
+      quantidade_entregue: alimento.quantidade_kg,
+      status: 'pendente',
+    }]);
+
     revalidatePath('/');
     redirect('/');
   }

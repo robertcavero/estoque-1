@@ -34,6 +34,7 @@ CREATE TABLE entregas (
     alimento_id INTEGER,
     data_entrega TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     quantidade_entregue DECIMAL(10,2) NOT NULL,
+    status VARCHAR(20) DEFAULT 'pendente',
     FOREIGN KEY (beneficiario_id) REFERENCES beneficiarios(id),
     FOREIGN KEY (alimento_id) REFERENCES alimentos(id)
 );

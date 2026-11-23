@@ -32,18 +32,26 @@ export default async function Header({ pathname = '/' }: { pathname?: string }) 
         </div>
 
         <div className="flex gap-2">
-          {pathname.startsWith('/doadores') ? (
-            <Link href="/" className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm">
-              Alimentos
-            </Link>
-          ) : (
+          {!pathname.startsWith('/doadores') && (
             <Link href="/doadores" className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm">
               Doadores
             </Link>
           )}
-          <Link href={pathname.startsWith('/doadores') ? '/doadores/novo' : '/novo'} className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm">
-            + Novo
-          </Link>
+          {!pathname.startsWith('/entregas') && (
+            <Link href="/entregas" className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm">
+              Entregas
+            </Link>
+          )}
+          {pathname.startsWith('/entregas') && (
+            <Link href="/" className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm">
+              Alimentos
+            </Link>
+          )}
+          {!pathname.startsWith('/entregas') && (
+            <Link href={pathname.startsWith('/doadores') ? '/doadores/novo' : '/novo'} className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm">
+              + Novo
+            </Link>
+          )}
 
           <form action={fazerLogout}>
             <button type="submit" className="bg-red-50 hover:bg-red-100 text-red-600 font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors cursor-pointer border border-red-200 text-sm">
