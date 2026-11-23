@@ -2,7 +2,7 @@
 
 > Sistema web de gestão de estoque para organização Nutracel
 
-O NutriStock é uma aplicação desenvolvida para a organização sem fins lucrativos Nutracel, idealizada para o controle interno do armazém de doações e gerenciamento de inventário de forma simples e eficiente.
+O NutriStock é uma aplicação desenvolvida para bancos de alimentos, cozinhas comunitárias e ONGs que precisam controlar doações, estoque e entregas de alimentos de forma simples e eficiente.
 
 ---
 
@@ -14,10 +14,12 @@ Desenvolvido como Projeto de Extensão em Desenvolvimento de Software, o NutriSt
 
 ## Funcionalidades
 
-- Autenticação segura com login por e-mail e senha
-- Categorização dos insumos (Não-perecíveis, Hortifruti, etc.)
-- Registro de doadores parceiros 
-- Registro de entregas realizadas
+- Autenticação com login por e-mail e senha
+- Cadastro, edição e remoção de alimentos em estoque
+- Categorização dos alimentos (Não-perecíveis, Hortifruti, etc.)
+- Gerenciamento de doadores (cadastrar, editar, remover)
+- Cadastro de beneficiários (famílias e instituições)
+- Feedback visual de confirmação
 - Interface responsiva para desktop e mobile
 
 ---
@@ -31,6 +33,7 @@ Desenvolvido como Projeto de Extensão em Desenvolvimento de Software, o NutriSt
 | Backend / Banco | [Supabase](https://supabase.com/) (PostgreSQL) |
 | Autenticação | Supabase Auth |
 | Deploy | [Vercel](https://vercel.com/) |
+
 
 ---
 
@@ -60,7 +63,6 @@ npm install
 
 **3. Configure as variáveis de ambiente**
 ```bash
-# crie o arquivo .env.local na raiz do projeto
 NEXT_PUBLIC_SUPABASE_URL=sua_url_do_supabase
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sua_chave_publica
 ```
@@ -69,7 +71,11 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sua_chave_publica
 
 Execute o arquivo `nutristock.sql` no SQL Editor do seu projeto Supabase.
 
-**5. Inicie o servidor**
+**5. Crie um usuário**
+
+No Supabase Dashboard, acesse **Authentication → Users → Add User** e crie a conta da instituição.
+
+**6. Inicie o servidor**
 ```bash
 npm run dev
 ```
@@ -85,21 +91,27 @@ frontend/
 ├── app/
 │   ├── components/
 │   │   └── layout/
-│   │       └── Header.tsx       # Cabeçalho
+│   │       └── Header.tsx           # Cabeçalho
+│   ├── doadores/
+│   │   ├── editar/[id]/
+│   │   │   └── page.tsx             # Editar doador
+│   │   ├── novo/
+│   │   │   └── page.tsx             # Cadastrar doador
+│   │   └── page.tsx                 # Lista de doadores
 │   ├── editar/[id]/
-│   │   └── page.tsx             # Editar item
+│   │   └── page.tsx                 # Editar alimento
 │   ├── login/
-│   │   └── page.tsx             # Tela de login
+│   │   └── page.tsx                 # Tela de login
 │   ├── novo/
-│   │   └── page.tsx             # Cadastrar item
+│   │   └── page.tsx                 # Cadastrar alimento
 │   ├── globals.css
 │   ├── layout.tsx
-│   └── page.tsx                 # Tela principal (estoque)
+│   └── page.tsx                     # Tela principal (estoque)
 ├── lib/
-│   ├── supabase.ts              # Cliente público
-│   └── supabase-server.ts       # Cliente servidor 
-├── proxy.ts                     # Middleware de autenticação
-└── nutristock.sql               # Código SQL (banco de dados)
+│   ├── supabase.ts                  # Cliente público
+│   └── supabase-server.ts           # Cliente servidor
+├── proxy.ts                         # Middleware de autenticação
+└── nutristock.sql                   # Código SQL (banco de dados)
 ```
 
 ---
@@ -110,6 +122,6 @@ Projeto desenvolvido para a disciplina de Projeto de Extensão em Desenvolviment
 
 ---
 
-## Licença
+## 📄 Licença
 
 Este projeto é de uso acadêmico.

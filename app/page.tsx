@@ -17,7 +17,6 @@ export default async function Home() {
   async function deletarAlimento(formData: FormData) {
     'use server';
     const id = formData.get('id');
-    // Usa o cliente de servidor dentro da action também
     const supabaseServer = await createClient();
     const { error } = await supabaseServer.from('alimentos').delete().eq('id', id);
     if (!error) revalidatePath('/'); 

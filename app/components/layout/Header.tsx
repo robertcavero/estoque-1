@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase-server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
-export default async function Header() {
+export default async function Header({ pathname = '/' }: { pathname?: string }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
@@ -32,7 +32,16 @@ export default async function Header() {
         </div>
 
         <div className="flex gap-2">
-          <Link href="/novo" className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm">
+          {pathname.startsWith('/doadores') ? (
+            <Link href="/" className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm">
+              Alimentos
+            </Link>
+          ) : (
+            <Link href="/doadores" className="bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm">
+              Doadores
+            </Link>
+          )}
+          <Link href={pathname.startsWith('/doadores') ? '/doadores/novo' : '/novo'} className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-sm">
             + Novo
           </Link>
 

@@ -1,12 +1,3 @@
--- ============================================================
--- NUTRISTOCK - Script SQL Completo
--- ============================================================
-
-
--- ============================================================
--- 1. CREATE TABLES
--- ============================================================
-
 CREATE TABLE categorias (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL
@@ -48,9 +39,6 @@ CREATE TABLE entregas (
 );
 
 
--- ============================================================
--- 2. INSERTS (3 por tabela)
--- ============================================================
 
 INSERT INTO categorias (nome) VALUES
 ('Não-perecíveis'),
@@ -78,9 +66,6 @@ INSERT INTO entregas (beneficiario_id, alimento_id, quantidade_entregue) VALUES
 (3, 2, 4.0);
 
 
--- ============================================================
--- 3. SELECTS SIMPLES (uma por tabela)
--- ============================================================
 
 SELECT * FROM categorias;
 
@@ -93,11 +78,6 @@ SELECT * FROM alimentos;
 SELECT * FROM entregas;
 
 
--- ============================================================
--- 4. SELECTS COM JOIN
--- ============================================================
-
--- Estoque completo: alimento com sua categoria e doador
 SELECT
     a.nome            AS "Alimento",
     a.quantidade_kg   AS "Quantidade (kg)",
@@ -110,7 +90,6 @@ JOIN categorias c ON a.categoria_id = c.id
 JOIN doadores   d ON a.doador_id    = d.id
 ORDER BY a.data_validade ASC;
 
--- Histórico de entregas: quem recebeu o quê e quando
 SELECT
     b.nome_responsavel    AS "Família / Instituição",
     b.quantidade_membros  AS "Membros",
