@@ -6,7 +6,6 @@ import Header from './components/layout/Header';
 export const revalidate = 0; 
 
 export default async function Home() {
-  // NOVA FORMA DE CHAMAR O SUPABASE
   const supabase = await createClient();
 
   const { data: alimentos, error } = await supabase

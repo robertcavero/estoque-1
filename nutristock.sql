@@ -1,6 +1,8 @@
 CREATE TABLE categorias (
     id SERIAL PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL
+    nome VARCHAR(50) NOT NULL,
+    descricao TEXT,
+    prioridade_entrega TEXT
 );
 
 CREATE TABLE doadores (
